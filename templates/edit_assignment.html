@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Assignment</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Edit Assignment</h1>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="title"
+                value="{{ assignment['title'] }}"
+                placeholder="Assignment Title"
+                required
+            >
+
+            <input
+                type="text"
+                name="subject"
+                value="{{ assignment['subject'] }}"
+                placeholder="Subject"
+                required
+            >
+
+            <input
+                type="text"
+                name="description"
+                value="{{ assignment['description'] or '' }}"
+                placeholder="Description"
+            >
+
+            <input
+                type="date"
+                name="deadline"
+                value="{{ assignment['deadline'] }}"
+                required
+            >
+
+            <select name="priority">
+
+                <option value="Low"
+                    {% if assignment['priority'] == 'Low' %}selected{% endif %}>
+                    Low Priority
+                </option>
+
+                <option value="Medium"
+                    {% if assignment['priority'] == 'Medium' %}selected{% endif %}>
+                    Medium Priority
+                </option>
+
+                <option value="High"
+                    {% if assignment['priority'] == 'High' %}selected{% endif %}>
+                    High Priority
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Update Assignment
+            </button>
+
+        </form>
+
+        <p>
+            <a href="/">← Back to Dashboard</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

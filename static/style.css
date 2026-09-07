@@ -1,0 +1,209 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 40px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+}
+
+.form-box,
+.assignment-box {
+    background: white;
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+input {
+    padding: 12px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.assignment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.actions a {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.pending {
+    font-weight: bold;
+}
+
+.completed {
+    font-weight: bold;
+}
+.top-bar {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-box {
+    text-align: center;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.form-box input {
+    padding: 12px;
+    margin: 0;
+}
+.top-bar {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.stat-card h3 {
+    margin: 0;
+}
+
+.stat-card p {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+
+.form-box form {
+    display: grid;
+    gap: 12px;
+}
+
+.form-box input,
+.form-box select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-box button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.assignment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.assignment h3 {
+    margin-top: 0;
+}
+
+.actions a {
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pending {
+    font-weight: bold;
+}
+
+.completed {
+    font-weight: bold;
+}
+.filter-box {
+    background: white;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+.filter-box form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-box input,
+.filter-box select {
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filter-box button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-box a {
+    padding: 11px;
+    text-decoration: none;
+}
