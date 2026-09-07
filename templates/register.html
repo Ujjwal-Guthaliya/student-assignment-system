@@ -1,60 +1,288 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Register - Student Assignment Manager</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>StudyFlow | Create Account</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
-<body>
 
-<div class="container">
+<body class="auth-body">
 
-    <div class="form-box">
 
-        <h1>Create Account</h1>
+<div class="auth-page">
 
-        <p>Create your student account</p>
 
-        <form method="POST">
+    <!-- ==========================================
+         LEFT SIDE
+    =========================================== -->
 
-            <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                required
-            >
+    <div class="auth-brand">
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-            >
+        <div class="auth-brand-content">
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-            >
 
-            <button type="submit">
-                Register
-            </button>
+            <!-- BRAND -->
 
-        </form>
+            <div class="brand">
 
-        <p>
-            Already have an account?
-            <a href="/login">Login</a>
-        </p>
+                <div class="brand-icon">
+                    S
+                </div>
+
+                <div>
+
+                    <h2>StudyFlow</h2>
+
+                    <span>Student Workspace</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="auth-message">
+
+                <span class="welcome-label">
+                    STUDENT ASSIGNMENT MANAGEMENT
+                </span>
+
+                <h1>
+                    Build better<br>
+                    study habits.
+                </h1>
+
+                <p>
+                    Create your personal workspace to manage
+                    assignments, deadlines and academic progress
+                    in one place.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="auth-features">
+
+                <div>
+
+                    <span>✓</span>
+
+                    Organize your assignments
+
+                </div>
+
+
+                <div>
+
+                    <span>✓</span>
+
+                    Set priorities and deadlines
+
+                </div>
+
+
+                <div>
+
+                    <span>✓</span>
+
+                    Track your academic progress
+
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
 
+
+
+    <!-- ==========================================
+         RIGHT SIDE
+    =========================================== -->
+
+    <div class="auth-form-area">
+
+
+        <div class="auth-card">
+
+
+            <!-- MOBILE BRAND -->
+
+            <div class="mobile-brand">
+
+                <div class="brand-icon">
+                    S
+                </div>
+
+                <strong>
+                    StudyFlow
+                </strong>
+
+            </div>
+
+
+
+            <!-- HEADING -->
+
+            <div class="auth-heading">
+
+                <span class="section-label">
+                    GET STARTED
+                </span>
+
+                <h2>
+                    Create your account
+                </h2>
+
+                <p>
+                    Set up your student workspace in a few seconds.
+                </p>
+
+            </div>
+
+
+
+            <!-- REGISTER FORM -->
+
+            <form
+                method="POST"
+                action="/register"
+                class="auth-form">
+
+
+                <!-- NAME -->
+
+                <div class="input-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Minimum 6 characters"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="auth-submit">
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="auth-divider">
+
+                <span>OR</span>
+
+            </div>
+
+
+
+            <!-- LOGIN -->
+
+            <p class="auth-switch">
+
+                Already have an account?
+
+                <a href="/login">
+                    Sign In
+                </a>
+
+            </p>
+
+
+
+            <!-- FOOTER -->
+
+            <div class="auth-footer">
+
+                <span>
+                    StudyFlow
+                </span>
+
+                <span>
+                    Student Assignment Management System
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
 </div>
 
+
 </body>
+
 </html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>StudyFlow | My Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+        defer>
+    </script>
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                S
+            </div>
+
+            <div>
+
+                <h2>StudyFlow</h2>
+
+                <span>Student Workspace</span>
+
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="/" class="nav-item">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="/#assignments" class="nav-item">
+                <span>▣</span>
+                Assignments
+            </a>
+
+            <a href="/profile" class="nav-item active">
+                <span>◉</span>
+                My Profile
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="profile-mini">
+
+                {% if user["avatar"] %}
+
+                    <img
+                        src="{{ url_for('static',
+                                 filename='uploads/' + user['avatar']) }}"
+                        class="avatar avatar-image"
+                        alt="Profile">
+
+                {% else %}
+
+                    <div class="avatar">
+                        {{ user["name"][0]|upper }}
+                    </div>
+
+                {% endif %}
+
+                <div>
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                    <small>
+                        Student
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <a href="/logout" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="page-label">
+                    ACCOUNT SETTINGS
+                </span>
+
+                <h1>My Profile</h1>
+
+            </div>
+
+
+            <div class="top-user">
+
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle">
+                    🌙
+                </button>
+
+                <span>
+                    {{ user["name"] }}
+                </span>
+
+                {% if user["avatar"] %}
+
+                    <img
+                        src="{{ url_for('static',
+                                 filename='uploads/' + user['avatar']) }}"
+                        class="avatar avatar-image"
+                        alt="Profile">
+
+                {% else %}
+
+                    <div class="avatar">
+                        {{ user["name"][0]|upper }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </header>
+
+
+        <section class="profile-page">
+
+
+            <!-- PROFILE HEADER -->
+
+            <div class="profile-header">
+
+
+                {% if user["avatar"] %}
+
+                    <img
+                        src="{{ url_for('static',
+                                 filename='uploads/' + user['avatar']) }}"
+                        class="large-avatar profile-photo"
+                        alt="Profile Photo">
+
+                {% else %}
+
+                    <div class="large-avatar">
+                        {{ user["name"][0]|upper }}
+                    </div>
+
+                {% endif %}
+
+
+                <div>
+
+                    <h2>
+                        {{ user["name"] }}
+                    </h2>
+
+                    <p>
+                        {{ user["email"] }}
+                    </p>
+
+                    <span class="profile-badge">
+                        Student Account
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE FORM -->
+
+            <div class="profile-form-card">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        PERSONAL INFORMATION
+                    </span>
+
+                    <h2>Update Profile</h2>
+
+                    <p>
+                        Keep your student information up to date.
+                    </p>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="assignment-form">
+
+
+                    <!-- PHOTO -->
+
+                    <div class="input-group full">
+
+                        <label>
+                            Profile Avatar
+                        </label>
+
+                        <input
+                            type="file"
+                            name="avatar"
+                            accept="image/png,image/jpeg,image/gif,image/webp">
+
+                        <small class="file-hint">
+                            PNG, JPG, JPEG, GIF or WEBP
+                        </small>
+
+                    </div>
+
+
+                    <!-- NAME -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            value="{{ user['name'] }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value="{{ user['email'] }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- DOB -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            name="dob"
+                            value="{{ user['dob'] or '' }}">
+
+                    </div>
+
+
+                    <!-- INSTITUTE -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Institute Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="institute"
+                            value="{{ user['institute'] or '' }}"
+                            placeholder="Enter institute name">
+
+                    </div>
+
+
+                    <!-- COURSE -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Course
+                        </label>
+
+                        <input
+                            type="text"
+                            name="course"
+                            value="{{ user['course'] or '' }}"
+                            placeholder="e.g. B.Tech">
+
+                    </div>
+
+
+                    <!-- BRANCH -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Branch
+                        </label>
+
+                        <input
+                            type="text"
+                            name="branch"
+                            value="{{ user['branch'] or '' }}"
+                            placeholder="e.g. Information Technology">
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group full">
+
+                        <label>
+                            New Password
+
+                            <span class="optional">
+                                Leave blank to keep current password
+                            </span>
+
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter new password">
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+                        <a
+                            href="/"
+                            class="cancel-button">
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="submit-button">
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>
+                StudyFlow · Student Assignment Management System
+            </span>
+
+            <span>
+                Built with Flask · SQLite
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

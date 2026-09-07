@@ -1,85 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Edit Assignment</title>
+    <title>Edit Assignment - StudyFlow</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 
-<body>
+<body class="dark-mode">
 
-<div class="container">
+<div class="main" style="margin-left: 0; width: 100%;">
 
-    <div class="form-box">
+    <div class="topbar">
 
-        <h1>Edit Assignment</h1>
+        <div>
+            <span class="page-label">ASSIGNMENTS</span>
+            <h1>Edit Assignment</h1>
+        </div>
 
-        <form method="POST">
+        <div class="top-user">
+            <span>StudyFlow</span>
+        </div>
 
-            <input
-                type="text"
-                name="title"
-                value="{{ assignment['title'] }}"
-                placeholder="Assignment Title"
-                required
-            >
+    </div>
 
-            <input
-                type="text"
-                name="subject"
-                value="{{ assignment['subject'] }}"
-                placeholder="Subject"
-                required
-            >
 
-            <input
-                type="text"
-                name="description"
-                value="{{ assignment['description'] or '' }}"
-                placeholder="Description"
-            >
+    <div class="add-section">
 
-            <input
-                type="date"
-                name="deadline"
-                value="{{ assignment['deadline'] }}"
-                required
-            >
+        <div class="section-heading">
 
-            <select name="priority">
+            <span class="section-label">
+                UPDATE DETAILS
+            </span>
 
-                <option value="Low"
-                    {% if assignment['priority'] == 'Low' %}selected{% endif %}>
-                    Low Priority
-                </option>
+            <h2>Edit your assignment</h2>
 
-                <option value="Medium"
-                    {% if assignment['priority'] == 'Medium' %}selected{% endif %}>
-                    Medium Priority
-                </option>
+            <p>
+                Update the assignment information below and save your changes.
+            </p>
 
-                <option value="High"
-                    {% if assignment['priority'] == 'High' %}selected{% endif %}>
-                    High Priority
-                </option>
+        </div>
 
-            </select>
 
-            <button type="submit">
-                Update Assignment
-            </button>
+        <form method="POST" class="assignment-form">
+
+            <!-- Assignment Title -->
+            <div class="input-group">
+
+                <label for="title">
+                    Assignment Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value="{{ assignment['title'] }}"
+                    placeholder="Enter assignment title"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Subject -->
+            <div class="input-group">
+
+                <label for="subject">
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value="{{ assignment['subject'] }}"
+                    placeholder="Enter subject"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Description -->
+            <div class="input-group full">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    value="{{ assignment['description'] or '' }}"
+                    placeholder="Enter assignment description"
+                >
+
+            </div>
+
+
+            <!-- Deadline -->
+            <div class="input-group">
+
+                <label for="deadline">
+                    Deadline
+                </label>
+
+                <input
+                    type="date"
+                    id="deadline"
+                    name="deadline"
+                    value="{{ assignment['deadline'] }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Priority -->
+            <div class="input-group">
+
+                <label for="priority">
+                    Priority
+                </label>
+
+                <select id="priority" name="priority">
+
+                    <option value="Low"
+                        {% if assignment['priority'] == 'Low' %}selected{% endif %}>
+                        Low Priority
+                    </option>
+
+                    <option value="Medium"
+                        {% if assignment['priority'] == 'Medium' %}selected{% endif %}>
+                        Medium Priority
+                    </option>
+
+                    <option value="High"
+                        {% if assignment['priority'] == 'High' %}selected{% endif %}>
+                        High Priority
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="form-actions">
+
+                <a href="/"
+                   class="clear-button"
+                   style="margin-right: 10px;">
+                    ← Back to Dashboard
+                </a>
+
+                <button type="submit"
+                        class="submit-button">
+                    Update Assignment
+                </button>
+
+            </div>
 
         </form>
 
-        <p>
-            <a href="/">← Back to Dashboard</a>
-        </p>
-
     </div>
+
+
+    <footer>
+
+        <span>StudyFlow</span>
+
+        <span>Stay organized. Stay ahead.</span>
+
+    </footer>
 
 </div>
 

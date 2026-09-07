@@ -1,276 +1,717 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Student Assignment Manager</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyFlow | Student Dashboard</title>
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+      href="{{ url_for('static', filename='style.css') }}">
+
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
 
 </head>
 
 <body>
 
-<div class="top-bar">
+<div class="app">
 
-    <div>
-        <strong>Student Assignment Manager</strong>
-    </div>
+    <!-- SIDEBAR -->
 
-    <div>
-        Welcome, {{ user_name }} 👋
-        &nbsp;&nbsp;
-        <a href="/logout">Logout</a>
-    </div>
+    <aside class="sidebar">
 
-</div>
+        <div class="brand">
+
+            <div class="brand-icon">
+                S
+            </div>
+
+            <div>
+                <h2>StudyFlow</h2>
+                <span>Student Workspace</span>
+            </div>
+
+        </div>
 
 
-<div class="container">
+        <nav>
 
-    <h1>Student Dashboard</h1>
+            <nav>
 
-    <p class="subtitle">
-        Manage your assignments, deadlines and progress
-    </p>
+    <a href="/" class="nav-item active">
+        <span>⌂</span>
+        Dashboard
+    </a>
+
+    <a href="/#assignments" class="nav-item">
+        <span>▣</span>
+        Assignments
+    </a>
+
+    <a href="#add-assignment" class="nav-item">
+        <span>＋</span>
+        Add Assignment
+    </a>
+
     
-    <div class="filter-box">
 
-    <form method="GET" action="/">
+</nav>
 
-        <input
-            type="text"
-            name="search"
-            value="{{ search }}"
-            placeholder="Search assignment or subject"
-        >
 
-        <select name="status">
+        <div class="sidebar-bottom">
 
-            <option value="All"
-                {% if status == "All" %}selected{% endif %}>
-                All Status
-            </option>
+            <div class="profile-mini">
 
-            <option value="Pending"
-                {% if status == "Pending" %}selected{% endif %}>
-                Pending
-            </option>
+                <a href="/profile" class="profile-avatar-link">
 
-            <option value="Completed"
-                {% if status == "Completed" %}selected{% endif %}>
-                Completed
-            </option>
+    <div class="avatar">
+        {{ user_name[0]|upper }}
+    </div>
 
-        </select>
+</a>
 
-        <select name="priority">
+                <div>
+                    <strong>{{ user_name }}</strong>
+                    <small>Student</small>
+                </div>
 
-            <option value="All"
-                {% if priority == "All" %}selected{% endif %}>
-                All Priorities
-            </option>
+            </div>
 
-            <option value="High"
-                {% if priority == "High" %}selected{% endif %}>
-                High
-            </option>
+            <a href="/logout" class="logout">
+                Logout
+            </a>
 
-            <option value="Medium"
-                {% if priority == "Medium" %}selected{% endif %}>
-                Medium
-            </option>
+        </div>
 
-            <option value="Low"
-                {% if priority == "Low" %}selected{% endif %}>
-                Low
-            </option>
+    </aside>
 
-        </select>
 
-        <button type="submit">
-            Search
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="page-label">
+                    STUDENT WORKSPACE
+                </span>
+
+                <h1>Dashboard</h1>
+
+            </div>
+
+            <div class="top-user">
+
+    <button
+        id="theme-toggle"
+        class="theme-toggle">
+        🌙
+    </button>
+
+    <span>
+        Welcome back, {{ user_name }} 👋
+    </span>
+
+
+    <div class="profile-menu-wrapper">
+
+        <button
+            class="profile-menu-button"
+            id="profile-menu-button"
+            type="button">
+
+            {% if user["avatar"] %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='uploads/' + user['avatar']
+                    ) }}"
+                    class="avatar avatar-image"
+                    alt="Profile">
+
+            {% else %}
+
+                <div class="avatar">
+                    {{ user_name[0]|upper }}
+                </div>
+
+            {% endif %}
+
         </button>
 
-        <a href="/">
-            Clear
-        </a>
 
-    </form>
+        <div
+            class="profile-dropdown"
+            id="profile-dropdown">
+
+
+            <div class="dropdown-user">
+
+                {% if user["avatar"] %}
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='uploads/' + user['avatar']
+                        ) }}"
+                        class="dropdown-avatar"
+                        alt="Profile">
+
+                {% else %}
+
+                    <div class="dropdown-avatar">
+                        {{ user_name[0]|upper }}
+                    </div>
+
+                {% endif %}
+
+
+                <div>
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                    <small>
+                        {{ user["email"] }}
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="dropdown-divider"></div>
+
+
+            <a
+                href="/profile"
+                class="dropdown-item">
+
+                <span>👤</span>
+
+                <div>
+                    <strong>Update Profile</strong>
+                    <small>
+                        Personal information
+                    </small>
+                </div>
+
+            </a>
+
+
+            <div class="dropdown-divider"></div>
+
+
+            <a
+                href="/logout"
+                class="dropdown-item logout-item">
+
+                <span>🚪</span>
+
+                <div>
+                    <strong>Logout</strong>
+                    <small>
+                        Sign out of your account
+                    </small>
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
-    <!-- STATISTICS -->
-
-    <div class="stats">
-
-        <div class="stat-card">
-            <h3>Total</h3>
-            <p>{{ total }}</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Completed</h3>
-            <p>{{ completed }}</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Pending</h3>
-            <p>{{ pending }}</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Progress</h3>
-            <p>{{ progress }}%</p>
-        </div>
-
-    </div>
+        </header>
 
 
-    <!-- ADD ASSIGNMENT -->
+        <!-- WELCOME -->
 
-    <div class="form-box">
+        <section class="welcome">
 
-        <h2>Add New Assignment</h2>
+            <div>
 
-        <form action="/add" method="POST">
+                <span class="welcome-label">
+                    YOUR ACADEMIC OVERVIEW
+                </span>
 
-            <input
-                type="text"
-                name="title"
-                placeholder="Assignment Title"
-                required
-            >
+                <h2>
+                    Stay organized.<br>
+                    Stay ahead.
+                </h2>
 
-            <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-                required
-            >
+                <p>
+                    Manage assignments, track deadlines and monitor
+                    your academic progress from one place.
+                </p>
 
-            <input
-                type="text"
-                name="description"
-                placeholder="Description"
-            >
+            </div>
 
-            <input
-                type="date"
-                name="deadline"
-                required
-            >
+            <div class="welcome-icon">
+                📚
+            </div>
 
-            <select name="priority">
-
-                <option value="Low">Low Priority</option>
-
-                <option value="Medium" selected>
-                    Medium Priority
-                </option>
-
-                <option value="High">
-                    High Priority
-                </option>
-
-            </select>
-
-            <button type="submit">
-                Add Assignment
-            </button>
-
-        </form>
-
-    </div>
+        </section>
 
 
-    <!-- ASSIGNMENTS -->
+        <!-- STATISTICS -->
 
-    <div class="assignment-box">
+        <section class="stats">
 
-        <h2>My Assignments</h2>
+            <div class="stat-card">
 
-        {% if assignments %}
+                <div class="stat-icon total-icon">
+                    ◈
+                </div>
 
-            {% for assignment in assignments %}
+                <div>
+                    <span>Total Assignments</span>
+                    <strong>{{ total }}</strong>
+                </div>
 
-                <div class="assignment">
+            </div>
 
-                    <div>
 
-                        <h3>
-                            {{ assignment["title"] }}
-                        </h3>
+            <div class="stat-card">
 
-                        <p>
-                            <strong>Subject:</strong>
-                            {{ assignment["subject"] }}
-                        </p>
+                <div class="stat-icon completed-icon">
+                    ✓
+                </div>
 
-                        <p>
-                            <strong>Description:</strong>
-                            {{ assignment["description"] }}
-                        </p>
+                <div>
+                    <span>Completed</span>
+                    <strong>{{ completed }}</strong>
+                </div>
 
-                        <p>
-                            <strong>Deadline:</strong>
-                            {{ assignment["deadline"] }}
-                        </p>
+            </div>
 
-                        <p>
-                            <strong>Priority:</strong>
-                            {{ assignment["priority"] }}
-                        </p>
 
-                        {% if assignment["completed"] %}
+            <div class="stat-card">
 
-                            <span class="completed">
-                                Completed ✓
-                            </span>
+                <div class="stat-icon pending-icon">
+                    !
+                </div>
 
-                        {% else %}
+                <div>
+                    <span>Pending</span>
+                    <strong>{{ pending }}</strong>
+                </div>
 
-                            <span class="pending">
-                                Pending
-                            </span>
+            </div>
 
-                        {% endif %}
+
+            <div class="stat-card progress-card">
+
+                <div class="stat-icon progress-icon">
+                    %
+                </div>
+
+                <div class="progress-info">
+
+                    <div class="progress-heading">
+
+                        <span>Overall Progress</span>
+
+                        <strong>{{ progress }}%</strong>
 
                     </div>
 
+                    <div class="progress-bar">
 
-                    <div class="actions">
-
-                        {% if not assignment["completed"] %}
-
-                        <a href="/complete/{{ assignment['id'] }}">
-                                Complete
-                        </a>
-
-                        {% endif %}
-                        <a href="/edit/{{ assignment['id'] }}">
-                            Edit
-                        </a>
-                        <a href="/delete/{{ assignment['id'] }}">
-                            Delete
-                        </a>
+                        <div
+                            class="progress-fill"
+                            style="width: {{ progress }}%;">
+                        </div>
 
                     </div>
 
                 </div>
 
-            {% endfor %}
+            </div>
 
-        {% else %}
+        </section>
 
-            <p>
-                No assignments added yet.
-            </p>
 
-        {% endif %}
+        <!-- FILTERS -->
 
-    </div>
+        <section class="toolbar">
+
+            <div>
+
+                <h2>My Assignments</h2>
+
+                <p>
+                    View and manage your academic tasks
+                </p>
+
+            </div>
+
+
+            <a href="#add-assignment" class="add-button">
+                + New Assignment
+            </a>
+
+        </section>
+
+
+        <section class="filter-panel">
+
+            <form method="GET" action="/">
+
+                <div class="search-wrapper">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ search }}"
+                        placeholder="Search assignments or subjects..."
+                    >
+
+                </div>
+
+
+                <select name="status">
+
+                    <option value="All"
+                        {% if status == "All" %}selected{% endif %}>
+                        All Status
+                    </option>
+
+                    <option value="Pending"
+                        {% if status == "Pending" %}selected{% endif %}>
+                        Pending
+                    </option>
+
+                    <option value="Completed"
+                        {% if status == "Completed" %}selected{% endif %}>
+                        Completed
+                    </option>
+
+                </select>
+
+
+                <select name="priority">
+
+                    <option value="All"
+                        {% if priority == "All" %}selected{% endif %}>
+                        All Priorities
+                    </option>
+
+                    <option value="High"
+                        {% if priority == "High" %}selected{% endif %}>
+                        High Priority
+                    </option>
+
+                    <option value="Medium"
+                        {% if priority == "Medium" %}selected{% endif %}>
+                        Medium Priority
+                    </option>
+
+                    <option value="Low"
+                        {% if priority == "Low" %}selected{% endif %}>
+                        Low Priority
+                    </option>
+
+                </select>
+
+
+                <button type="submit" class="filter-button">
+                    Apply
+                </button>
+
+
+                <a href="/" class="clear-button">
+                    Clear
+                </a>
+
+            </form>
+
+        </section>
+
+
+        <!-- ASSIGNMENTS -->
+
+        <section id="assignments" class="assignments">
+
+            {% if assignments %}
+
+                {% for assignment in assignments %}
+
+                <article class="assignment-card">
+
+                    <div class="assignment-main">
+
+                        <div class="assignment-top">
+
+                            <div>
+
+                                <h3>
+                                    {{ assignment["title"] }}
+                                </h3>
+
+                                <span class="subject">
+                                    {{ assignment["subject"] }}
+                                </span>
+
+                            </div>
+
+
+                            <span class="priority
+                                priority-{{ assignment['priority']|lower }}">
+
+                                {{ assignment["priority"] }}
+
+                            </span>
+
+                        </div>
+
+
+                        {% if assignment["description"] %}
+
+                        <p class="description">
+                            {{ assignment["description"] }}
+                        </p>
+
+                        {% else %}
+
+                        <p class="description muted">
+                            No description provided
+                        </p>
+
+                        {% endif %}
+
+
+                        <div class="assignment-meta">
+
+                            <span>
+                                📅 {{ assignment["deadline"] }}
+                            </span>
+
+
+                            {% if assignment["completed"] %}
+
+                            <span class="status completed-status">
+                                ✓ Completed
+                            </span>
+
+                            {% else %}
+
+                            <span class="status pending-status">
+                                ● Pending
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="assignment-actions">
+
+                        {% if not assignment["completed"] %}
+
+                        <a
+                            href="/complete/{{ assignment['id'] }}"
+                            class="complete-button">
+
+                            Mark Complete
+
+                        </a>
+
+                        {% endif %}
+
+
+                        <a
+                            href="/edit/{{ assignment['id'] }}"
+                            class="edit-button">
+
+                            Edit
+
+                        </a>
+
+
+                        <a
+                            href="/delete/{{ assignment['id'] }}"
+                            class="delete-button">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ✓
+                    </div>
+
+                    <h3>No assignments found</h3>
+
+                    <p>
+                        Try changing your filters or add a new assignment.
+                    </p>
+
+                    <a href="#add-assignment" class="add-button">
+                        + Add Assignment
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- ADD ASSIGNMENT -->
+
+        <section id="add-assignment" class="add-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        CREATE NEW
+                    </span>
+
+                    <h2>Add New Assignment</h2>
+
+                    <p>
+                        Keep track of your upcoming academic work.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form action="/add" method="POST" class="assignment-form">
+
+                <div class="input-group">
+
+                    <label>Assignment Title</label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="e.g. Jenkins CI/CD Pipeline"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Subject</label>
+
+                    <input
+                        type="text"
+                        name="subject"
+                        placeholder="e.g. DevOps"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group full">
+
+                    <label>Description</label>
+
+                    <input
+                        type="text"
+                        name="description"
+                        placeholder="Briefly describe the assignment..."
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Deadline</label>
+
+                    <input
+                        type="date"
+                        name="deadline"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>Priority</label>
+
+                    <select name="priority">
+
+                        <option value="Low">
+                            Low Priority
+                        </option>
+
+                        <option value="Medium" selected>
+                            Medium Priority
+                        </option>
+
+                        <option value="High">
+                            High Priority
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button type="submit" class="submit-button">
+                        Add Assignment
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <footer>
+
+            <span>
+                StudyFlow · Student Assignment Management System
+            </span>
+
+            <span>
+                Built with Flask · SQLite
+            </span>
+
+        </footer>
+
+    </main>
 
 </div>
 
