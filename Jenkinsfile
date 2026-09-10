@@ -26,7 +26,12 @@ pipeline {
                 bat 'docker build -t studyflow:latest .'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                bat 'docker rm -f studyflow-app >nul 2>&1 || echo No existing container'
+                bat 'docker run -d -p 5000:5000 --name studyflow-app studyflow:latest'
+            }
+        }
     }
 }
-
-// Jenkins automatic trigger test
