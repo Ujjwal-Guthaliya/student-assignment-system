@@ -28,3 +28,5 @@ pipeline {
         }
     }
 }
+
+// Jenkins automatic trigger test
