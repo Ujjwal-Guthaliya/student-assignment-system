@@ -488,7 +488,7 @@ def login():
 
             return redirect("/")
 
-        return "Invalid email or password."
+        return render_template("login.html", error="Invalid email or password.")
 
     return render_template(
         "login.html"

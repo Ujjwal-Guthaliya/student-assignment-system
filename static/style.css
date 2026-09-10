@@ -2113,3 +2113,13 @@ body.dark-mode .dropdown-divider {
 
     border-top: 1px solid rgba(255, 255, 255, 0.10);
 }
+.login-error {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    text-align: center;
+}

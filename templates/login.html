@@ -126,6 +126,11 @@
 
             </div>
 
+{% if error %}
+    <div class="login-error">
+        {{ error }}
+    </div>
+{% endif %}
 
             <form
                 method="POST"
